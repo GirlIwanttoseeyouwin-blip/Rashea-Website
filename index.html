@@ -913,15 +913,13 @@ function addMsg(role, text){
   return div;
 }
 
-function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+function getWrappedLines(ctx, text, maxWidth){
   const words = text.split(' ');
   let line = '';
-  let curY = y;
   const lines = [];
   for(let n = 0; n < words.length; n++){
     const testLine = line + words[n] + ' ';
-    const testWidth = ctx.measureText(testLine).width;
-    if(testWidth > maxWidth && n > 0){
+    if(ctx.measureText(testLine).width > maxWidth && n > 0){
       lines.push(line.trim());
       line = words[n] + ' ';
     } else {
@@ -929,18 +927,40 @@ function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
     }
   }
   lines.push(line.trim());
-  lines.forEach((l, i) => ctx.fillText(l, x, curY + i * lineHeight));
-  return curY + lines.length * lineHeight;
+  return lines;
+}
+
+function drawLines(ctx, lines, x, y, lineHeight){
+  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
+  return y + lines.length * lineHeight;
 }
 
 async function makeActionCard(rawText){
   await document.fonts.load("600 34px 'Playfair Display'");
-  await document.fonts.load("italic 500 30px 'Playfair Display'");
+  await document.fonts.load("italic 500 28px 'Playfair Display'");
   await document.fonts.load("600 13px 'Archivo'");
 
-  const cleanText = rawText.replace(/(https?:\/\/[^\s]+)/g, '').replace(/\s+/g,' ').trim();
+  let cleanText = rawText.replace(/(https?:\/\/[^\s]+)/g, '').replace(/\s+/g,' ').trim();
 
-  const W = 1080, H = 1350;
+  const W = 1080;
+  const textX = 100, textMaxWidth = W - 200, lineHeight = 48;
+  const measureCanvas = document.createElement('canvas');
+  const mctx = measureCanvas.getContext('2d');
+  mctx.font = "600 34px 'Playfair Display'";
+
+  let lines = getWrappedLines(mctx, cleanText, textMaxWidth);
+  const MAX_LINES = 13;
+  if(lines.length > MAX_LINES){
+    lines = lines.slice(0, MAX_LINES);
+    lines[MAX_LINES-1] = lines[MAX_LINES-1].replace(/[.,;:—-]*$/, '') + '…';
+  }
+
+  const headerHeight = 460;
+  const textBlockHeight = lines.length * lineHeight;
+  const giftBlockHeight = 130;
+  const footerHeight = 260;
+  const H = headerHeight + textBlockHeight + giftBlockHeight + footerHeight;
+
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
@@ -973,11 +993,8 @@ async function makeActionCard(rawText){
 
   ctx.textAlign = 'center';
   ctx.fillStyle = '#8A6328';
-  ctx.font = "600 22px 'Archivo'";
-  ctx.save();
   ctx.font = "600 20px 'Archivo'";
   ctx.fillText('Y O U R   N E X T   S T E P', cx, 340);
-  ctx.restore();
 
   ctx.strokeStyle = '#CB994D';
   ctx.lineWidth = 2;
@@ -989,19 +1006,21 @@ async function makeActionCard(rawText){
   ctx.fillStyle = '#0A0A0A';
   ctx.font = "600 34px 'Playfair Display'";
   ctx.textAlign = 'left';
-  const endY = wrapCanvasText(ctx, cleanText, 100, 460, W-200, 48);
+  const textEndY = drawLines(ctx, lines, textX, headerHeight, lineHeight);
 
-  const quoteY = Math.min(endY + 60, H - 340);
+  const giftY = textEndY + 70;
   ctx.fillStyle = '#9B4F4B';
-  ctx.font = "italic 500 30px 'Playfair Display'";
+  ctx.font = "italic 500 28px 'Playfair Display'";
   ctx.textAlign = 'center';
-  ctx.fillText('"One Quarter Can Change Your Life."', cx, quoteY);
+  ctx.fillText('My gift to you.', cx, giftY);
+  ctx.fillText('"I want to see you win."', cx, giftY + 40);
 
+  const footerLineY = H - 220;
   ctx.strokeStyle = 'rgba(10,10,10,0.15)';
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(140, H-220);
-  ctx.lineTo(W-140, H-220);
+  ctx.moveTo(140, footerLineY);
+  ctx.lineTo(W-140, footerLineY);
   ctx.stroke();
 
   ctx.fillStyle = '#0A0A0A';

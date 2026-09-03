@@ -860,11 +860,23 @@ const raeSend = document.getElementById('raeSend');
 let history = [];
 let busy = false;
 
+function linkify(text){
+  const urlRegex = /(https?:\/\/[^\s<]+)/g;
+  return text.replace(urlRegex, (url) => {
+    let trail = '';
+    while (/[.,!?;:)]$/.test(url)) {
+      trail = url.slice(-1) + trail;
+      url = url.slice(0, -1);
+    }
+    return `<a href="${url}" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; font-weight:600;">${url}</a>${trail}`;
+  });
+}
+
 function addMsg(role, text){
   const div = document.createElement('div');
   div.className = 'msg ' + (role==='user' ? 'user-m' : 'rae-m');
   if(role !== 'user'){
-    div.innerHTML = '<b>RAE:</b> ' + text.replace(/</g,'&lt;');
+    div.innerHTML = '<b>RAE:</b> ' + linkify(text.replace(/</g,'&lt;'));
   } else {
     div.textContent = text;
   }

@@ -252,7 +252,7 @@
   }
 
   /* ---------- I SELL MONEY ---------- */
-  .sell{background:var(--ink); color:var(--white); border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);}
+  .sell{background:var(--ink); color:var(--white); border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); padding-top:56px;}
   .sell-grid{display:grid; grid-template-columns:0.55fr 1.45fr; gap:56px; align-items:center;}
   .sell-photo img{width:100%; height:auto; display:block; border:1.5px solid var(--gold);}
   .sell-text-head{margin-bottom:24px;}
@@ -270,10 +270,17 @@
   .sell-body strong{color:var(--gold); font-weight:700;}
   .lips-icon{height:22px; width:auto; display:inline-block; vertical-align:middle; margin-left:8px; position:relative; top:-2px;}
   .sell-bs-line{
-    font-size:clamp(15px,2vw,19px); font-weight:700; letter-spacing:0.03em; color:var(--gold);
-    white-space:nowrap; overflow-x:auto; margin:4px 0 20px !important;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start;
+    gap:6px 12px; font-size:clamp(15px,2vw,19px); font-weight:700; letter-spacing:0.03em; color:var(--rose-bright);
+    margin:4px 0 20px !important;
   }
-  @media (max-width:820px){ .sell-grid{grid-template-columns:1fr; gap:28px;} .sell-photo{max-width:280px; margin:0 auto;} }
+  .sell-bs-line .dot{color:var(--gold); font-weight:400;}
+  @media (max-width:820px){
+    .sell-grid{grid-template-columns:1fr; gap:28px; text-align:center;}
+    .sell-photo{max-width:360px; margin:0 auto;}
+    .sell-body p{margin-left:auto; margin-right:auto;}
+    .sell-bs-line{justify-content:center;}
+  }
 
   /* ---------- EVENT ---------- */
   .event{background:var(--white); color:var(--ink); border-top:1px solid var(--ink); border-bottom:1px solid var(--ink);}
@@ -431,18 +438,6 @@
     </div>
   </section>
 
-  <!-- STORY -->
-  <section class="story" id="story">
-    <div class="wrap story-grid">
-      <div class="pull">"I spent years learning how to figure it out. Now I use what I know, who I know, and what I've built to help other people figure it out too."</div>
-      <div class="story-body">
-        <p>I lost my mother young, and it rearranged the way I see everything — ownership, preparation, money, protection, legacy. I didn't come to this from a pedestal. I came to it from figuring it out, losing some of it, and rebuilding smarter the second time.</p>
-        <p>Every business I've built since is a vehicle. I'm the connector. The relationships, the resources, the blueprint — that's what I bring to the table.</p>
-        <p>This isn't about waiting for a new year or the "perfect" moment. A quarter — 90 days — is long enough to create real, measurable change, and short enough to feel possible. One decision can redirect your whole quarter.</p>
-        <p class="signature-line"><a href="https://page.co/z13ojl" target="_blank" rel="noopener" style="color:inherit;">Got Change?</a></p>
-      </div>
-    </div>
-  </section>
 
   <!-- I SELL MONEY -->
   <section class="sell" id="sell">
@@ -462,7 +457,7 @@
           <p>I've built multiple businesses and income streams, but the bigger vision has always been about more than making money. It's about access. Ownership. Freedom. And legacy.</p>
           <p>Today, I use what I've learned, built, and connected to help others make money, multiply money, build businesses, get in the right rooms, and create something that can outlive them.</p>
           <p>That vision comes together through my 5 B's™:</p>
-          <p class="sell-bs-line">Believe &nbsp;•&nbsp; Belong &nbsp;•&nbsp; Build &nbsp;•&nbsp; Become &nbsp;•&nbsp; Bless</p>
+          <p class="sell-bs-line"><span>Believe</span><span class="dot">•</span><span>Belong</span><span class="dot">•</span><span>Build</span><span class="dot">•</span><span>Become</span><span class="dot">•</span><span>Bless</span></p>
           <p>Because there isn't only one road to success. Sometimes you need a strategy. Sometimes you need a resource. Sometimes you need a new room. And sometimes you simply need someone to show you the door you didn't know existed. That's where I come in.</p>
           <p>Most people don't invite you to get in their business. But I'm inviting you to get in mine. Because when I find something that can help you make a move, make money, build something of your own, or get closer to the life you want — I'm going to share it.</p>
           <p>If this sounds like something you need, here's your chance to</p>
@@ -505,6 +500,19 @@
           <div class="eco-name">Everything Worked Out<em>™</em></div>
           <div class="eco-desc">The experience at the end of the quarter, where we gather to celebrate the growth, the progress, and the win.</div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="wrap story-grid">
+      <div class="pull">"I spent years learning how to figure it out. Now I use what I know, who I know, and what I've built to help other people figure it out too."</div>
+      <div class="story-body">
+        <p>I lost my mother as a young adult, and it rearranged the way I see everything — ownership, preparation, money, protection, legacy. I didn't come to this from a pedestal. I came to it from figuring it out, losing some of it, and rebuilding smarter the second time.</p>
+        <p>Every business I've built since is a vehicle. I'm the connector. The relationships, the resources, the blueprint — that's what I bring to the table.</p>
+        <p>This isn't about waiting for a new year or the "perfect" moment. A quarter — 90 days — is long enough to create real, measurable change, and short enough to feel possible. One decision can redirect your whole quarter.</p>
+        <p class="signature-line"><a href="https://page.co/z13ojl" target="_blank" rel="noopener" style="color:inherit;">Got Change?</a></p>
       </div>
     </div>
   </section>
@@ -644,7 +652,7 @@
         </div>
         <div class="testi-card">
           <div class="testi-quote">"From my first meeting with Rashea, she immediately assisted me with building a strong business profile and met every deadline. I now have a strong business profile and a score on Dun & Bradstreet. Mad Business Solutions is the truth!"</div>
-          <div class="testi-name">— Mad Business Solutions Client</div>
+          <div class="testi-name">— Char Robinson, Mad Business Solutions Client</div>
         </div>
         <div class="testi-card">
           <div class="testi-quote">"You encourage and empower me FOR REAL!! Cause Lord knows I was in my feelings."</div>
@@ -831,7 +839,7 @@ FIVE_BS.forEach((b, i)=>{
 /* ---------------- Rae chat ---------------- */
 const RAE_SYSTEM = `You are RAE — short for Rashea's AI Energy — the AI twin of Rashea Edmond, founder of Rashea Edmond LLC. You write and speak exactly like Rashea would. Always write your own name in all caps as "RAE" (never "Rae").
 
-WHO RASHEA IS: Born and raised in the Philadelphia area, mother of three. Bachelor's degree in Business Administration, Associate's degree in Early Childhood Education. Before full-time entrepreneurship she had a corporate healthcare administration career — including Children's Hospital of Philadelphia (International Adoption, Business Administrator), plus administrative experience at Jefferson Hospital, Einstein Hospital, and the Hospital of the University of Pennsylvania. She's a Visionary Strategist, Founder, Legacy Architect, Eco Systems Builder, business development strategist, investor, trader, philanthropist, community builder, and mentor. She lost her mother young, which made legacy deeply personal to her — not a marketing word. She is not a generic motivational speaker or a "boss babe" caricature — she's grounded, resourceful, and gives real resources and connections, not just cheerleading. Signature line: "I don't just cheer for you, I hand you the playbook."
+WHO RASHEA IS: Born and raised in the Philadelphia area, mother of three. Bachelor's degree in Business Administration, Associate's degree in Early Childhood Education. Before full-time entrepreneurship she had a corporate healthcare administration career — including Children's Hospital of Philadelphia (International Adoption, Business Administrator), plus administrative experience at Jefferson Hospital, Einstein Hospital, and the Hospital of the University of Pennsylvania. She's a Visionary Strategist, Founder, Legacy Architect, Eco Systems Builder, business development strategist, investor, trader, philanthropist, community builder, and mentor. She lost her mother as a young adult, which made legacy deeply personal to her — not a marketing word. She is not a generic motivational speaker or a "boss babe" caricature — she's grounded, resourceful, and gives real resources and connections, not just cheerleading. Signature line: "I don't just cheer for you, I hand you the playbook."
 
 HER STORY: In 2013 she started a nonprofit, M.A.D. — Mary Ann's Daughter, in honor of her mother, built around "turning pain into prosperity." In 2017 she started M.A.D Creations 215, an apparel company that grew from a side hustle into a six-figure business — that's where she learned branding, marketing, sales, operations, and leadership, and eventually left her corporate career because she was tired of building someone else's dream. She built a successful business but realized she hadn't built freedom — she was making money but always working, missing family time, and her income still depended on her physical labor. That shifted her question from "how do I make more money" to "how do I make money without giving away all my time," which led her to study leverage, OPM (other people's money), investing, and different income models (active, leveraged, residual). She was introduced to trading in the stock market, which changed her relationship with money — teaching her that money can work hard for her instead of her only working hard for money; she became a trader and started teaching others what she learned. In 2024, while planning an international trip and looking to save money, she discovered travel commission through a social media post, attended an event, and got into the travel industry — which introduced her to leveraged and residual income at a bigger scale. When her son turned 18, she gifted him a business — that's what ownership means to her. Signing her legacy paperwork with PlanNet, with two of her three kids beside her, is a moment she says she'll never forget; she also holds an Indexed Universal Life insurance policy as another legacy vehicle. Her core belief: "I am my greatest asset" — she intentionally invests in herself through books, mentorship, networking, and new rooms, because "you can't take advantage of an opportunity you don't know exists."
 

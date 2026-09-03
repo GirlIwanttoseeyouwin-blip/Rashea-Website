@@ -538,7 +538,7 @@
           <span>RAE · Rashea's AI Energy</span>
         </div>
         <div class="rae-msgs" id="raeMsgs">
-          <div class="msg rae-m"><b>RAE:</b> Hey girl. I'm RAE. Tell me where you're at right now, and I'll point you to your next door.</div>
+          <div class="msg rae-m"><b>RAE:</b> Hey. I'm RAE. Tell me where you're at right now, and I'll point you to your next door.</div>
         </div>
         <div class="rae-input-row">
           <input type="text" id="raeInput" placeholder="Ask RAE anything…" autocomplete="off">
@@ -848,11 +848,11 @@ THE BUSINESSES (vehicles — always position Rashea as the connector/liaison, no
 - Girl, I Want to See You Win Shop — branded merchandise (the Believe Robe, sleep mask, tea cup set, and more). Site: https://payhip.com/GirlIwanttoseeyouwin
 - Everything Worked Out — a 12-week mindset and accountability experience: pick ONE meaningful goal, give it full focus for 12 weeks, then meet up at the end of each fiscal quarter to celebrate the growth, progress, and win. Signature lines: "One Goal. One Quarter. One Decision to Lock In." and "One Quarter Can Change Your Life.™" Powered by Get In My Business. Girl, I Want to See You Win.™ Link: https://page.co/coiych
 
-VOICE RULES: Conversational, bold, encouraging (never shaming), unapologetic, resourceful, grounded (strategy and execution matter, not mystical talk), feminine but strong, energetic, no filler. Use "Girl…" naturally sometimes. Short punches mixed with fuller thoughts. Direct CTAs. Never sound preachy or like you've never struggled.
+VOICE RULES: Relatable but professional. Conversational, bold, encouraging (never shaming), unapologetic, resourceful, grounded (strategy and execution matter, not mystical talk), warm but direct, energetic, no filler. Do NOT use "Girl…" or other gendered address — speak to everyone the same way, regardless of who they are. Short punches mixed with fuller thoughts. Direct CTAs. Never sound preachy or like you've never struggled.
 
 NEVER: use generic openings like "Are you ready to unlock your full potential?"; call things a "journey" or "empowerment" without real substance; use excessive emojis; make income promises or fake urgency; sound like a corporate chatbot.
 
-HOW TO RESPOND: Keep replies conversational and fairly short — a few sentences to a short paragraph, not a wall of text. When relevant, name the specific B(s) at play and point to the one right vehicle/link for what they're asking about. If someone wants a deeper 1:1 conversation, direct them to book a call at https://calendly.com/rasheaedmond/tb. If a question is about something you don't have real information on, be honest and point them to book a call or email support@rasheaedmond.com rather than making something up.`;
+HOW TO RESPOND: Keep every reply SHORT — 2 to 4 sentences max, almost never more. This is a chat widget on a phone screen, not an email. Give ONE next step, not a menu of options. Share at most ONE link per reply unless the person explicitly asks for a full list. If several doors could fit what they're asking, pick the single most likely one and name it — don't lay out all five B's or every income stream at once "just in case." If you're not sure what they need, ask ONE short clarifying question instead of guessing broadly across multiple pathways. Never stack more than one URL in a single reply. If someone wants a deeper 1:1 conversation, or the conversation is going back and forth without landing anywhere, just direct them to book a call at https://calendly.com/rasheaedmond/tb. If a question is about something you don't have real information on, be honest and point them to book a call or email support@rasheaedmond.com rather than making something up.`;
 
 const raeMsgsEl = document.getElementById('raeMsgs');
 const raeInput = document.getElementById('raeInput');
@@ -897,15 +897,15 @@ async function sendToRae(text){
     });
     const data = await response.json();
     typing.remove();
-    let reply = "Girl, my signal cut out for a second — try that again, or just book a call: https://calendly.com/rasheaedmond/tb";
+    let reply = "My signal cut out for a second — try that again, or just book a call: https://calendly.com/rasheaedmond/tb";
     if (data && data.content){
-      reply = data.content.map(c => c.type === 'text' ? c.text : '').join('\\n').trim() || reply;
+      reply = data.content.map(c => c.type === 'text' ? c.text : '').join('\n').trim() || reply;
     }
     addMsg('rae', reply);
     history.push({role:'assistant', content: reply});
   } catch(err){
     typing.remove();
-    addMsg('rae', "Girl, my signal cut out for a second — try that again, or just book a call: https://calendly.com/rasheaedmond/tb");
+    addMsg('rae', "My signal cut out for a second — try that again, or just book a call: https://calendly.com/rasheaedmond/tb");
   }
   busy = false;
   raeSend.disabled = false;
